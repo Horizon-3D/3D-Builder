@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:pr1="http://schemas.microsoft.com/windows/2014/04/wdp/printV20" xmlns:UNS1="http://www.microsoft.com/windows/test/testdevice/11/2005">
+  <soap:Header>
+    <wsa:To>%EndPoint%</wsa:To>
+    <wsa:Action>http://schemas.microsoft.com/windows/2014/04/wdp/printV20/CreatePrintJob2</wsa:Action>
+    <wsa:MessageID>urn:uuid:%MessageId%</wsa:MessageID>
+    <wsa:ReplyTo>
+      <wsa:Address>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:Address>
+    </wsa:ReplyTo>
+    <wsa:From><wsa:Address>urn:uuid:%SenderGuid%</wsa:Address></wsa:From>
+    <UNS1:ServiceIdentifier>
+      uri:prn
+    </UNS1:ServiceIdentifier>
+  </soap:Header>
+  <soap:Body>
+    <pr1:CreatePrintJob2Request>
+      <pr1:JobDescription2>
+        <pr1:JobName>%JobName%</pr1:JobName>
+        <pr1:JobOriginatingUserName>%JobOwner%</pr1:JobOriginatingUserName>
+        <pr1:JobOriginatingUserIdentityEntries>
+          <pr1:UserIdentityEntry>
+            <pr1:UserIdentityProvider>WindowsServerActiveDirectory</pr1:UserIdentityProvider>
+            <pr1:UserIdentity>%UserIdentity%</pr1:UserIdentity>
+          </pr1:UserIdentityEntry>
+        </pr1:JobOriginatingUserIdentityEntries>
+      </pr1:JobDescription2>
+    </pr1:CreatePrintJob2Request>
+  </soap:Body>
+</soap:Envelope>

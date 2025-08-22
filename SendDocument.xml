@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:pri="http://schemas.microsoft.com/windows/2006/08/wdp/print" xmlns:xop="http://www.w3.org/2004/08/xop/include">
+  <soap:Header>
+    <wsa:To>%EndPoint%</wsa:To>
+    <wsa:Action>http://schemas.microsoft.com/windows/2006/08/wdp/print/SendDocument</wsa:Action>
+    <wsa:MessageID>urn:uuid:%MessageId%</wsa:MessageID>
+    <wsa:ReplyTo>
+      <wsa:Address>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</wsa:Address>
+    </wsa:ReplyTo>
+    <wsa:From>
+      <wsa:Address>urn:uuid:%SenderGuid%</wsa:Address>
+    </wsa:From>
+  </soap:Header>
+  <soap:Body>
+    <pri:SendDocumentRequest>
+      <pri:JobId>%JobId%</pri:JobId>
+      <pri:WsdPrintUWP>true</pri:WsdPrintUWP>
+      <pri:DocumentDescription>
+        <pri:DocumentId>1</pri:DocumentId>
+        <pri:Compression>None</pri:Compression>
+        <pri:Format>application/vnd.ms-3mfdocument</pri:Format>
+      </pri:DocumentDescription>
+      <pri:LastDocument>true</pri:LastDocument>
+      <pri:DocumentData>
+        <xop:Include href="cid:0@body"/>
+      </pri:DocumentData>
+    </pri:SendDocumentRequest>
+  </soap:Body>
+</soap:Envelope>

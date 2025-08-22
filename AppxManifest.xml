@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Package IgnorableNamespaces="uap mp rescap desktop build" xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10" xmlns:build="http://schemas.microsoft.com/developer/appx/2015/build">
+  <Identity Name="Microsoft.3DBuilder" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="20.0.4.0" ProcessorArchitecture="x64" />
+  <mp:PhoneIdentity PhoneProductId="48150599-78e8-4d43-85e2-ea7bca12f7b7" PhonePublisherId="95d94207-0c7c-47ed-82db-d75c81153c35" />
+  <Properties>
+    <DisplayName>3D Builder</DisplayName>
+    <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
+    <Logo>Assets\manifestAssets\StoreLogo.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.15063.0" MaxVersionTested="10.0.17763.0" />
+    <PackageDependency Name="Microsoft.UI.Xaml.2.0" MinVersion="2.1810.18003.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+    <PackageDependency Name="Microsoft.VCLibs.140.00" MinVersion="14.0.30704.0" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+  </Dependencies>
+  <Resources>
+    <Resource Language="EN-US" />
+    <Resource Language="EN-GB" />
+    <Resource uap:Scale="100" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="Builder3D.exe" EntryPoint="PrintPreview.App">
+      <Extensions>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="com.microsoft.builder3d" />
+        </uap:Extension>
+        <uap:Extension Category="windows.print3DWorkflow" Executable="Builder3D.exe" EntryPoint="PrintPreview.App" />
+        <uap:Extension Category="windows.printTaskSettings" Executable="Builder3D.exe" EntryPoint="PrintPreview.App" />
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="3dobject">
+            <uap:DisplayName>ms-resource:AppFileTypeName</uap:DisplayName>
+            <uap:Logo>Assets\ManifestAssets\Icon.png</uap:Logo>
+            <uap:InfoTip>ms-resource:AppFileTypeTooltip</uap:InfoTip>
+            <uap:SupportedFileTypes>
+              <uap:FileType>.stl</uap:FileType>
+              <uap:FileType>.3mf</uap:FileType>
+              <uap:FileType>.obj</uap:FileType>
+              <uap:FileType>.wrl</uap:FileType>
+              <uap:FileType>.ply</uap:FileType>
+              <uap:FileType>.gltf</uap:FileType>
+              <uap:FileType>.glb</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+      </Extensions>
+      <uap:VisualElements DisplayName="3D Builder" Description="ms-resource:appDescription" BackgroundColor="transparent" Square150x150Logo="Assets\manifestAssets\Square150x150Logo.png" Square44x44Logo="Assets\manifestAssets\Square44x44Logo.png">
+        <uap:DefaultTile ShortName="ms-resource:appShortName" Square310x310Logo="Assets\manifestAssets\Square310x310Logo.png" Wide310x150Logo="Assets\manifestAssets\Square310x150Logo.png" Square71x71Logo="Assets\manifestAssets\Square71x71Logo.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+        <uap:SplashScreen Image="Assets\manifestAssets\SplashScreen.png" BackgroundColor="#464646" />
+        <uap:InitialRotationPreference>
+          <uap:Rotation Preference="landscape" />
+          <uap:Rotation Preference="landscapeFlipped" />
+        </uap:InitialRotationPreference>
+      </uap:VisualElements>
+      <uap:ApplicationContentUriRules>
+        <uap:Rule Match="https://catalog3d.azurewebsites.net" Type="include" WindowsRuntimeAccess="allowForWebOnly" />
+        <uap:Rule Match="https://www.remix3d.com" Type="include" WindowsRuntimeAccess="all" />
+        <uap:Rule Match="https://hubble.officeapps.live.com" Type="include" WindowsRuntimeAccess="all" />
+        <uap:Rule Match="https://hubble.edog.officeapps.live.com" Type="include" WindowsRuntimeAccess="all" />
+        <uap:Rule Match="https://hubble.officeapps.live-int.com" Type="include" WindowsRuntimeAccess="all" />
+        <uap:Rule Match="https://hubble-int.azurewebsites.net" Type="include" WindowsRuntimeAccess="all" />
+        <uap:Rule Match="https://hubble-test.azurewebsites.net" Type="include" WindowsRuntimeAccess="all" />
+        <uap:Rule Match="https://hubblecontent.osi.office.net" Type="include" WindowsRuntimeAccess="all" />
+        <uap:Rule Match="https://hubblecontent.osi.office-int.net" Type="include" WindowsRuntimeAccess="all" />
+        <uap:Rule Match="https://hubblecontent.osi.officeppe.net" Type="include" WindowsRuntimeAccess="all" />
+      </uap:ApplicationContentUriRules>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <Capability Name="privateNetworkClientServer" />
+    <uap:Capability Name="objects3D" />
+    <rescap:Capability Name="enterpriseDataPolicy" />
+    <rescap:Capability Name="broadFileSystemAccess" />
+    <rescap:Capability Name="confirmAppClose" />
+  </Capabilities>
+  <Extensions>
+    <Extension Category="windows.activatableClass.inProcessServer">
+      <InProcessServer>
+        <Path>OnlineMediaComponent.dll</Path>
+        <ActivatableClass ActivatableClassId="OnlineMediaComponent.Picker3DViewModel" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="OnlineMediaComponent.Picker3DDataTemplateSelector" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="OnlineMediaComponent.XamlMetaDataProvider" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="OnlineMediaComponent.HologramsConfig" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="OnlineMediaComponent.Picker3DItemsSource" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="OnlineMediaComponent.HubbleWebConfig" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="OnlineMediaComponent.HologramsProvider" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="OnlineMediaComponent.Picker3DGridView" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="OnlineMediaComponent.HubbleMediaProvider" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="OnlineMediaComponent.HubbleMediaConfig" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="OnlineMediaComponent.Picker3D" ThreadingModel="both" />
+        <ActivatableClass ActivatableClassId="OnlineMediaComponent.HubbleWebContentProvider" ThreadingModel="both" />
+      </InProcessServer>
+    </Extension>
+  </Extensions>
+  <build:Metadata>
+    <build:Item Name="cl.exe" Version="19.16.27050.0 built by: vcwrkspc" />
+    <build:Item Name="VisualStudio" Version="15.0" />
+    <build:Item Name="VisualStudioEdition" Value="Microsoft Visual Studio Enterprise 2017" />
+    <build:Item Name="OperatingSystem" Version="10.0.25931.1000 (WinBuild.160101.0800)" />
+    <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="15.0.33801.198" />
+    <build:Item Name="ProjectGUID" Value="{c5e265c9-4230-43ac-81ee-a6ef33f8d4f7}" />
+    <build:Item Name="OptimizingToolset" Value="None" />
+    <build:Item Name="TargetRuntime" Value="Native" />
+    <build:Item Name="Microsoft.Windows.UI.Xaml.Build.Tasks.dll" Version="10.0.17763.132" />
+    <build:Item Name="WindowsDesktop" Version="10.0.17763.0" />
+    <build:Item Name="WindowsTeam" Version="10.0.17763.0" />
+    <build:Item Name="MakePri.exe" Version="10.0.17763.132 (WinBuild.160101.0800)" />
+  </build:Metadata>
+</Package>
